@@ -20,7 +20,7 @@ public class BirthrightsRoleModel extends RoleModel {
 
 	public BirthrightsRoleModel() {
 		super();
-		this.setType(RoleTypeEnum.Birthrights);
+		this.setType(RoleType.Birthrights);
 	}
 
 	@Override

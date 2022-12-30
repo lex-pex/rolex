@@ -3,13 +3,13 @@ package tasks.roller.mappers.maps;
 import java.util.List;
 
 import rolex.object.Batch;
-import tasks.roller.models.RoleTypeEnum;
+import tasks.roller.models.RoleType;
 import tasks.roller.models.RoleModel;
 
 public class MapModel {
 	// Common fields 
 	public RoleModel model(RoleModel model, Batch batch) {
-		model.setType(RoleTypeEnum.valueOf(batch.getType()));
+		model.setType(RoleType.valueOf(batch.getType()));
 		model.setRoleName(batch.getName());
 		model.setDisplayName(batch.getDisplayName());
 		model.setDescription(batch.getDescription("en_US"));

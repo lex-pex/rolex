@@ -13,13 +13,13 @@ import rolex.object.QueryOptions;
 import rolex.object.TaskResult;
 import rolex.tools.GeneralException;
 import lombok.RequiredArgsConstructor;
-import tasks.roller.models.RoleTypeEnum;
+import tasks.roller.models.RoleType;
 
 @RequiredArgsConstructor
 public class Roller {
 
 	private final CsvConverter csvConverter;
-	private final Map<RoleTypeEnum, BatchMapper> bundleMapperMap;
+	private final Map<RoleType, BatchMapper> bundleMappersMap;
 	private final RolexContext context;
 	private final TaskResult taskResult;
 	private Map<String, RoleModel> models;
@@ -31,17 +31,17 @@ public class Roller {
 
 		// process 'Organizational' containers
 		models.entrySet().stream()
-				.filter(entry -> entry.getValue().getType().equals( RoleTypeEnum.Organizational ))
+				.filter(entry -> entry.getValue().getType().equals( RoleType.Organizational ))
 					.forEach(entry -> processOrganizationalRole( entry.getValue() ));
 
 		// process 'It' tasks.roler.models
 		models.entrySet().stream()
-			.filter(entry -> entry.getValue().getType().equals( RoleTypeEnum.It ))
+			.filter(entry -> entry.getValue().getType().equals( RoleType.It ))
 				.forEach(entry -> processRoleModel( entry.getValue() ));
 
 		// process 'Birthrights' tasks.roler.models
 		models.entrySet().stream()
-			.filter(entry -> entry.getValue().getType().equals( RoleTypeEnum.Birthrights ))
+			.filter(entry -> entry.getValue().getType().equals( RoleType.Birthrights ))
 				.forEach(entry -> processRoleModel( entry.getValue() ));
 	}
 
@@ -87,9 +87,12 @@ public class Roller {
 		}
 	}
 
-	public Roller(CsvConverter csvConverter, Map<RoleTypeEnum, BatchMapper> bundleMapperMap, RolexContext context, TaskResult taskResult) {
+	public Roller( CsvConverter csvConverter, 
+						Map<RoleType, BatchMapper> bundleMappersMap, 
+							RolexContext context, 
+								TaskResult taskResult ) {
 		this.csvConverter = csvConverter;
-		this.bundleMapperMap = bundleMapperMap;
+		this.bundleMappersMap = bundleMappersMap;
 		this.context = context;
 		this.taskResult = taskResult;
 	}

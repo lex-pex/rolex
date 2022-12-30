@@ -20,22 +20,22 @@ public class RollerExecutor extends AbstractTaskExecutor {
 		RollerConfig.taskResult = res;
 		RollerConfig.csvPath = this.spreadSheetCsvFilePath;
 		// Main Code entry point
-		this.launchRolerPackage();
+		this.launchRollerPackage();
 	}
 
 	/**
 	 * The feature library entry point
 	 */
-	private void launchRolerPackage() {
+	private void launchRollerPackage() {
 
-		AbstractApplicationContext abstractApplicationContext = 
+		AbstractApplicationContext appContext = 
 				new AnnotationConfigApplicationContext( RollerConfig.class );
 
-		Roller roller = abstractApplicationContext . getBean( Roller.class );
+		Roller roller = appContext . getBean( Roller.class );
 
-		roller.buildRoles();
+		roller . buildRoles();
 
-		abstractApplicationContext.close();
+		appContext . close();
 	}
 
 	private void parseArguments(Attributes<String, Object> args, TaskResult taskResult) {

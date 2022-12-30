@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.EnableWebMvc;
 
 import tasks.roller.util.*;
 import tasks.roller.util.CsvReader;
@@ -13,13 +16,16 @@ import tasks.roller.mappers.mapper.BrBatchMapper;
 import tasks.roller.mappers.mapper.BatchMapper;
 import tasks.roller.mappers.mapper.ItBatchMapper;
 import tasks.roller.mappers.mapper.OrgBatchMapper;
-import tasks.roller.models.RoleTypeEnum;
+import tasks.roller.models.RoleType;
 import tasks.roller.validators.RollerValidator;
 import tasks.roller.validators.RollerValidatorImpl;
 import rolex.api.RolexContext;
 import rolex.object.TaskResult;
 
-@Configuration
+@Configuration 
+@ComponentScan("tasks.roller") 
+@PropertySource("classpath:roller.properties") 
+@EnableWebMvc 
 public class RollerConfig {
 
 	public static RolexContext context;
@@ -37,20 +43,20 @@ public class RollerConfig {
 	}
 
 	@Bean
-	public CsvConverter csvBuilder(CsvReader csvReader, RollerValidator rollerValidator) {
-		return new CsvConverterImpl(csvReader, rollerValidator);
+	public CsvConverter csvBuilder( CsvReader csvReader, RollerValidator rollerValidator ) {
+		return new CsvConverterImpl( csvReader, rollerValidator );
 	}
 
 	@Bean
-	public Roller roler(CsvConverter csvConverter) {
+	public Roller roler( CsvConverter csvConverter ) {
 
-		Map<RoleTypeEnum, BatchMapper> map = new HashMap<>();
+		Map<RoleType, BatchMapper> mappers = new HashMap<>();
 
-		map.put(RoleTypeEnum.Organizational, new OrgBatchMapper(context));
-		map.put(RoleTypeEnum.It, new ItBatchMapper(context));
-		map.put(RoleTypeEnum.Birthrights, new BrBatchMapper(context));
+		mappers.put( RoleType.Organizational, new OrgBatchMapper( context ) );
+		mappers.put( RoleType.It, new ItBatchMapper( context ) );
+		mappers.put( RoleType.Birthrights, new BrBatchMapper( context ) );
 
-		return new Roller(csvConverter, map, context, taskResult );
+		return new Roller( csvConverter, mappers, context, taskResult );
 
 	}
 }

@@ -1,6 +1,6 @@
 package tasks.roller.models;
 
-public enum RoleTypeEnum {
+public enum RoleType {
 	It,
 	Birthrights,
 	Organizational,

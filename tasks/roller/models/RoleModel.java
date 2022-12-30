@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class RoleModel {
 
-	private RoleTypeEnum type;
+	private RoleType type;
 	private String name;
 	private String displayName;
 	private String description;
@@ -46,15 +46,15 @@ public class RoleModel {
 				+ "inheritedRoleName : " + getInheritedRoleName() + "\n}";
 	}
 
-	public RoleTypeEnum getType() {
+	public RoleType getType() {
 		return type;
 	}
 
-	public void setType(RoleTypeEnum type) {
+	public void setType(RoleType type) {
 		this.type = type;
 	}
 
-	public RoleTypeEnum getType(RoleTypeEnum type) {
+	public RoleType getType(RoleType type) {
 		return this.type;
 	}
 

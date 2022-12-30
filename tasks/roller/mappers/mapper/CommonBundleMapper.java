@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rolex.object.Batch;
-import tasks.roller.models.RoleTypeEnum;
+import tasks.roller.models.RoleType;
 import tasks.roller.models.RoleModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class CommonBundleMapper {
 	private final RolexContext context;
 
 	public RoleModel bundleToModel(Batch batch, RoleModel model) {
-		model.setType(RoleTypeEnum.valueOf(batch.getType()));
+		model.setType(RoleType.valueOf(batch.getType()));
 		model.setRoleName(batch.getName());
 		model.setOwner(batch.getOwner().getName());
 		model.setDisplayName(batch.getDisplayName());

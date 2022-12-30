@@ -16,7 +16,7 @@ public class BusinessRoleModel extends RoleModel {
 	private  String assignmentRuleName;
 
 	public BusinessRoleModel() {
-		super.setType( RoleTypeEnum.Birthrights );
+		super.setType( RoleType.Birthrights );
 	}
 
 	@Override

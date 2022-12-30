@@ -16,7 +16,7 @@ public class ITRoleModel extends RoleModel {
 
 	public ITRoleModel() {
 		super();
-		this.setType( RoleTypeEnum.It );
+		this.setType( RoleType.It );
 	}
 
 	@Override

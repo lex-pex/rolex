@@ -11,7 +11,7 @@ public class OrgRoleModel extends RoleModel {
 
 	public OrgRoleModel() {
 		super();
-		this.setType(RoleTypeEnum.Organizational);
+		this.setType(RoleType.Organizational);
 	}
 
 	@Override
